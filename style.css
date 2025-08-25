@@ -1,0 +1,661 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+  }
+
+  nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(100, 58, 214, 0.95);
+	padding: 10px;
+	text-align: right;  /* 👈 align menu items to the right */
+	z-index: 1000;
+  }
+  
+  
+  nav a {
+	color: white;
+	margin: 0 15px;
+	text-decoration: none;
+  }
+  
+  nav a:hover {
+	text-decoration: none;
+  }
+  
+  /* Full-screen responsive image */
+  #home {
+	height: 100vh; /* full screen */
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+  }
+  
+  #home img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* keeps aspect ratio, no stretch */
+  }
+
+  
+
+  /* Gallery styling */
+.gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 15px;
+	padding: 20px;
+  }
+  
+  .gallery img {
+	width: 100%;
+	height: 250px; /* fixed height for neatness */
+	object-fit: cover; /* crop proportionally */
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	transition: transform 0.3s ease;
+  }
+  
+  .gallery img:hover {
+	transform: scale(1.05); /* zoom effect */
+  }
+
+  .page-title {
+	position: fixed;
+	text-align: center;
+	margin: 60px 0;
+  }
+
+  .section-title {
+	position: fixed;
+	text-align: center;
+	font-size: 2.5rem;
+	font-weight: bold;
+	color: #4b0082; /* deep purple to match your theme */
+	margin: 40px 5 20px;
+	position: relative;
+	font-family: 'Poppins', sans-serif; /* optional modern font */
+  }
+  
+  /* Decorative underline */
+  .section-title::after {
+	content: "";
+	display: block;
+	width: 80px;
+	height: 4px;
+	background: #4b0082;
+	margin: 10px auto 0;
+	border-radius: 2px;
+  }
+
+  /* Contact Page Styling */
+.contact-section {
+	max-width: 600px;
+	margin: 80px auto;
+	padding: 20px;
+	text-align: center;
+  }
+  
+  
+  
+  .contact-form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+	padding: 12px;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	font-size: 1rem;
+	width: 100%;
+	transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+	border-color: #4b0082;
+	box-shadow: 0 0 8px rgba(75, 0, 130, 0.2);
+	outline: none;
+  }
+  
+  .contact-form button {
+	background: #4b0082; /* Theme purple */
+	color: white;
+	padding: 12px;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background 0.3s;
+  }
+  
+  .contact-form button:hover {
+	background: #360062;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 600px) {
+	.contact-section {
+	  margin: 40px 20px;
+	  padding: 15px;
+	}
+	
+  }
+
+
+  /* ----- Contact details (add-on styles) ----- */
+.contact-section {
+	max-width: 1100px;
+	margin: 28px auto;
+	padding: 0 16px 40px;
+	box-sizing: border-box;
+  }
+  
+  .contact-wrap {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+	justify-content: center;
+  }
+  
+  /* Left column - business info */
+  .contact-details {
+	flex: 0 0 320px;
+	background: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+	color: #333;
+	line-height: 1.5;
+  }
+  
+  .contact-details h3 {
+	margin: 0 0 8px;
+	color: #4b0082; /* theme purple */
+	font-size: 1.15rem;
+  }
+  
+  .contact-details p {
+	margin: 8px 0;
+	font-size: 0.95rem;
+  }
+  
+  .contact-details a {
+	color: #4b0082;
+	text-decoration: none;
+	font-weight: 600;
+  }
+  
+  /* Right column - form container */
+  .contact-form {
+	flex: 1 1 420px;
+	min-width: 260px;
+	background: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  }
+  
+  /* if you already have form input styles, these will match; otherwise they improve look */
+  .contact-form form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+	padding: 12px;
+	border-radius: 8px;
+	border: 1px solid #d0cfe6;
+	font-size: 1rem;
+	width: 100%;
+	box-sizing: border-box;
+  }
+  
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+	outline: none;
+	border-color: #4b0082;
+	box-shadow: 0 0 10px rgba(75,0,130,0.12);
+  }
+  
+  .contact-form button {
+	background: #4b0082; /* theme purple */
+	color: #fff;
+	border: none;
+	padding: 12px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 1rem;
+  }
+  .contact-form button:hover {
+	background: #360062;
+  }
+  
+  /* Responsive: stack columns on small screens */
+  @media (max-width: 768px) {
+	.contact-wrap {
+	  flex-direction: column;
+	  gap: 16px;
+	}
+	.contact-details,
+	.contact-form {
+	  width: 100%;
+	  flex: none;
+	}
+	.contact-section {
+	  margin-top: 16px;
+	  padding-bottom: 30px;
+	}
+  }
+
+  /* Responsive map below contact section */
+.map-wrapper {
+	max-width: 1100px;
+	margin: 20px auto 48px;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+	background: #fff;
+  }
+  
+  /* Modern browsers: use aspect-ratio */
+  .map-wrapper iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	display: block;
+	aspect-ratio: 16 / 9; /* primary layout */
+  }
+  
+  /* Fallback for browsers without aspect-ratio support */
+  @supports not (aspect-ratio: 16/9) {
+	.map-wrapper {
+	  position: relative;
+	  padding-top: 56.25%; /* 16:9 ratio fallback */
+	}
+	.map-wrapper iframe {
+	  position: absolute;
+	  top: 0; left: 0;
+	  width: 100%;
+	  height: 100%;
+	}
+  }
+
+  
+  /* ===========================
+   Services section (theme-matching, elegant & responsive)
+   =========================== */
+
+.services-section {
+	background: transparent;
+	padding: 34px 16px 56px;
+	box-sizing: border-box;
+  }
+  
+  .services-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+  }
+  
+  /* Header */
+  .services-header {
+	text-align: center;
+	margin-bottom: 22px;
+  }
+  
+  .services-title {
+	font-size: 2.05rem;
+	margin: 0;
+	color: #4b0082;            /* deep purple theme */
+	font-weight: 700;
+	letter-spacing: 0.2px;
+	font-family: "Montserrat", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  
+  /* Subheading / tagline */
+  .services-subtitle {
+	margin: 8px 0 0;
+	color: #5b4a7a;            /* softer purple */
+	font-size: 0.98rem;
+	opacity: 0.95;
+  }
+  
+  /* Grid: responsive 1-3 columns */
+  .services-grid {
+	display: grid;
+	gap: 18px;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	align-items: start;
+  }
+  
+  /* Card */
+  .service-card {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 18px;
+	box-shadow: 0 8px 22px rgba(11, 12, 20, 0.06);
+	transition: transform 0.18s ease, box-shadow 0.18s ease;
+	min-height: 200px;
+  }
+  
+  /* Hover lift */
+  .service-card:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 14px 36px rgba(11, 12, 20, 0.09);
+  }
+  
+  /* Card heading */
+  .card-title {
+	margin: 0 0 8px;
+	font-size: 1.05rem;
+	color: #3a0066;    /* slightly darker purple for headings */
+	font-weight: 700;
+  }
+  
+  /* Service list */
+  .service-card ul {
+	list-style: none;
+	padding: 0;
+	margin: 6px 0 0;
+	line-height: 1.7;
+	color: #2f2f2f;
+	font-size: 0.98rem;
+  }
+  
+  /* small purple bullet */
+  .service-card li {
+	position: relative;
+	padding-left: 18px;
+	margin: 6px 0;
+  }
+  .service-card li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 9px;
+	width: 8px;
+	height: 8px;
+	background: linear-gradient(180deg, #6b23c8, #4b0082);
+	border-radius: 50%;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  }
+  
+  /* Tighten fonts on small screens */
+  @media (max-width: 520px) {
+	.services-title { font-size: 1.6rem; }
+	.services-subtitle { font-size: 0.92rem; }
+	.card-title { font-size: 1rem; }
+	.service-card { padding: 14px; }
+	.service-card ul { font-size: 0.95rem; }
+  }
+  
+  /* Optional: allow smoother rendering for devices */
+  @media (prefers-reduced-motion: no-preference) {
+	.service-card { will-change: transform; }
+  }
+
+  /* REPLACE these rules in style.css */
+
+/* Ensure grid items all stretch to equal height */
+.services-grid {
+	display: grid;
+	gap: 18px;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	align-items: stretch;   /* important: make items equal height */
+  }
+  
+  /* Make each card fill its grid cell and use flex column layout */
+  .service-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 18px;
+	box-shadow: 0 8px 22px rgba(11, 12, 20, 0.06);
+	transition: transform 0.18s ease, box-shadow 0.18s ease;
+	height: 100%;           /* important: let card stretch to full cell height */
+	box-sizing: border-box;
+  }
+  
+  /* Keep lists below title and spaced properly */
+  .service-card ul {
+	margin-top: 10px;
+	list-style: none;
+	padding: 0;
+	line-height: 1.7;
+	color: #2f2f2f;
+	font-size: 0.98rem;
+	/* push list to the bottom if you want equal spacing:
+	   margin-top: auto;  <-- optional */
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap');
+  /* Scoped styles for the EVOLVE about block (styles.css) */
+.evolve-about {
+	box-sizing: border-box;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: clamp(20px, 4vw, 48px);
+	color: #1b1b1f;
+	font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	background: transparent;
+  }
+  
+  .evolve-about__wrap {
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: 1fr;
+	align-items: start;
+  }
+  
+  /* Heading */
+  .evolve-about__title {
+	font-family: "Playfair Display", Georgia, serif;
+	font-weight: 600;
+	font-size: clamp(20px, 3.2vw, 30px);
+	margin: 0 0 0.35rem 0;
+	color: #0f1720;
+	letter-spacing: -0.2px;
+  }
+  
+  .evolve-about__subtitle {
+	margin: 0 0 0.9rem 0;
+	font-size: clamp(13px, 1.6vw, 15px);
+	color: #475569;
+  }
+  
+  /* Paragraphs */
+  .evolve-about p {
+	margin: 0 0 1rem 0;
+	line-height: 1.65;
+	font-size: clamp(15px, 1.8vw, 17px);
+	color: #1f2937;
+  }
+  
+  /* Services highlight box */
+  .evolve-about__services {
+	margin-top: 0.5rem;
+	padding: 1rem;
+	border-radius: 10px;
+	border: 1px solid rgba(15, 23, 42, 0.06);
+	background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(249,250,251,0.6));
+	box-shadow: 0 6px 18px rgba(15, 23, 42, 0.03);
+  }
+  
+  .evolve-about__services strong {
+	display: inline-block;
+	margin-bottom: 0.35rem;
+	font-weight: 600;
+  }
+  
+  /* Two-column layout on larger screens */
+  @media (min-width: 860px) {
+	.evolve-about__wrap {
+	  grid-template-columns: 1fr 420px;
+	  gap: clamp(18px, 3vw, 36px);
+	}
+	.evolve-about__services {
+	  position: sticky;
+	  top: 32px;
+	  height: fit-content;
+	}
+  }
+  
+  /* Small visual accents */
+  .evolve-about__accent {
+	display:inline-block;
+	width:46px;
+	height:3px;
+	background: linear-gradient(90deg,#ff6b6b,#6c44d9);
+	border-radius:3px;
+	margin: 0.5rem 0 1rem 0;
+  }
+
+ /* Tiny footer — responsive & theme-matching */
+.tiny-footer {
+	background: #6c44d9;         /* deep purple (matches theme) */
+	color: #f4eaff;
+	width: 100%;
+	padding: 12px 10px;
+	box-sizing: border-box;
+	font-size: 0.95rem;
+	border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  
+  .tiny-footer-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	text-align: center;
+  }
+  
+  /* text and link styles */
+  .tiny-footer .tf-copy,
+  .tiny-footer .tf-credit { margin: 0; line-height: 1.3; }
+  
+  .tiny-footer .tf-link {
+	color: #ffd7ff;             /* gentle accent */
+	text-decoration: none;
+	font-weight: 600;
+  }
+  .tiny-footer .tf-link:hover { text-decoration: underline; }
+  
+  /* smaller screens */
+  @media (max-width: 480px) {
+	.tiny-footer { padding: 10px 8px; font-size: 0.88rem; }
+	.tiny-footer-inner { gap: 6px; }
+  }
+  .footer-space-down{
+ margin-top: 165px;
+  }
+  
+
+
+  /* Home hero heading + tagline overlay (responsive, theme-matching) */
+#home {
+	position: relative;
+	height: 100vh;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  /* background image kept as <img> for your current setup */
+  .hero-image {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;     /* no stretch, fills viewport */
+	display: block;
+	transform-origin: center;
+	will-change: transform;
+  }
+  
+  /* subtle purple overlay to match theme + improve contrast */
+  .hero-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(44,0,63,0.45), rgba(44,0,63,0.30));
+	z-index: 1;
+  }
+  
+  /* centered content above the image */
+  .hero-content {
+	position: relative;
+	z-index: 2;
+	text-align: center;
+	padding: 0 20px;           /* breathe on small screens */
+	pointer-events: none;      /* keep clicks to nav if overlapped */
+  }
+  
+  /* Main heading — elegant serif */
+  .hero-title {
+	margin: 0;
+	font-family: "Playfair Display", serif;
+	color: #fff;
+	font-size: clamp(2.2rem, 6vw, 4.2rem); /* responsive size */
+	line-height: 1.02;
+	font-weight: 700;
+	letter-spacing: 0.4px;
+	text-shadow: 0 10px 28px rgba(0,0,0,0.55); /* depth on image */
+  }
+  
+  /* small decorative accent under the heading */
+  .hero-title::after {
+	content: "";
+	display: block;
+	width: 92px;
+	height: 4px;
+	margin: 16px auto 0;
+	border-radius: 3px;
+	background: linear-gradient(90deg, #ffd7ff, #b66bff);
+  }
+  
+  /* Tagline — clean sans */
+  .hero-tagline {
+	margin: 12px 0 0;
+	font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
+	color: #f7e9ff;
+	font-size: clamp(1rem, 2.2vw, 1.45rem);
+	font-weight: 300;
+	letter-spacing: 0.2px;
+	text-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  }
+  
+  /* keep content slightly lower so the fixed nav doesn't overlap it */
+  @media (min-width: 700px) {
+	.hero-content { transform: translateY(6%); }
+  }
+  
+  /* smaller screens: tighten spacing */
+  @media (max-width: 420px) {
+	.hero-title::after { width: 64px; height: 3px; margin-top: 12px; }
+	.hero-title { font-size: clamp(1.6rem, 8vw, 2.6rem); }
+	.hero-tagline { font-size: 0.95rem; }
+  }
+  
+  
+
+  
+  
+  
+  
+  
+  
