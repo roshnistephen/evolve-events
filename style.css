@@ -429,6 +429,11 @@
 	animation: slideInLeft 0.8s ease-out;
   }
   
+  .contact-details-centered {
+	margin: 0 auto;
+	max-width: 600px;
+  }
+  
   .contact-details:hover {
 	transform: translateY(-5px);
 	box-shadow: 0 15px 40px rgba(75, 0, 130, 0.15);
@@ -620,9 +625,9 @@
 
 .services-section {
 	background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-	padding: 100px 30px 80px;
+	padding: 100px 30px 40px;
 	box-sizing: border-box;
-	min-height: 100vh;
+	min-height: calc(100vh - 100px);
   }
   
   .services-inner {
@@ -1028,7 +1033,18 @@
   }
   
   .footer-space-down {
-	margin-top: 80px;
+	margin-top: 60px;
+  }
+  
+  @media (max-width: 768px) {
+	.footer-space-down {
+	  margin-top: 40px;
+	}
+	
+	.services-section {
+	  padding: 80px 20px 20px;
+	  min-height: auto;
+	}
   }
   
 
