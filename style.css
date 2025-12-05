@@ -181,65 +181,99 @@
 .gallery {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	gap: 25px;
+	gap: 30px;
 	padding: 20px 0;
   }
   
   .gallery-item {
 	position: relative;
-	overflow: hidden;
-	border-radius: 12px;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	overflow: visible;
+	border-radius: 16px;
+	box-shadow: 0 8px 30px rgba(75, 0, 130, 0.15);
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-	background: #f8f9fa;
+	background: linear-gradient(135deg, #4b0082, #6c44d9, #b66bff, #ffd7ff, #4b0082);
+	background-size: 400% 400%;
+	padding: 4px;
 	cursor: pointer;
+	animation: glowingBorderAnim 4s ease-in-out infinite, gradientShift 8s ease infinite;
+  }
+
+  @keyframes glowingBorderAnim {
+	0%, 100% {
+	  box-shadow: 0 0 15px rgba(75, 0, 130, 0.3), 0 0 30px rgba(108, 68, 217, 0.2);
+	}
+	50% {
+	  box-shadow: 0 0 25px rgba(75, 0, 130, 0.5), 0 0 50px rgba(182, 107, 255, 0.3);
+	}
+  }
+
+  .gallery-item::before {
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	right: -2px;
+	bottom: -2px;
+	background: linear-gradient(45deg, #4b0082, #6c44d9, #b66bff, #ffd7ff, #4b0082, #6c44d9);
+	background-size: 300% 300%;
+	border-radius: 18px;
+	z-index: -1;
+	animation: rotateBorderGradient 3s linear infinite;
+	filter: blur(3px);
+	opacity: 0.7;
   }
   
+  @keyframes gradientShift {
+	0%, 100% {
+	  background-position: 0% 50%;
+	}
+	50% {
+	  background-position: 100% 50%;
+	}
+  }
+
+  @keyframes rotateBorderGradient {
+	0% {
+	  background-position: 0% 50%;
+	}
+	50% {
+	  background-position: 100% 50%;
+	}
+	100% {
+	  background-position: 0% 50%;
+	}
+  }
+
   .gallery img {
 	width: 100%;
 	height: 300px;
 	object-fit: cover;
 	transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 	display: block;
+	border-radius: 12px;
   }
   
   .gallery-item:hover {
-	transform: translateY(-10px);
-	box-shadow: 0 20px 40px rgba(75, 0, 130, 0.2);
+	transform: translateY(-12px) scale(1.02);
+	box-shadow: 0 25px 60px rgba(75, 0, 130, 0.3), 0 0 30px rgba(182, 107, 255, 0.4);
+  }
+
+  .gallery-item:hover::before {
+	opacity: 1;
+	filter: blur(6px);
   }
   
   .gallery-item:hover img {
-	transform: scale(1.1);
+	transform: scale(1.08);
   }
   
+  /* Hide gallery overlay text - per requirements */
   .gallery-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: linear-gradient(180deg, transparent, rgba(75, 0, 130, 0.8));
-	opacity: 0;
-	transition: opacity 0.4s ease;
-	display: flex;
-	align-items: flex-end;
-	padding: 20px;
-  }
-  
-  .gallery-item:hover .gallery-overlay {
-	opacity: 1;
+	display: none !important;
   }
   
   .gallery-text {
-	color: white;
-	font-size: 0.95rem;
-	font-weight: 500;
-	transform: translateY(20px);
-	transition: transform 0.4s ease;
-  }
-  
-  .gallery-item:hover .gallery-text {
-	transform: translateY(0);
+	display: none !important;
   }
   
   @media (max-width: 768px) {
@@ -249,18 +283,22 @@
 	
 	.gallery {
 	  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	  gap: 20px;
+	  gap: 25px;
 	}
 	
 	.gallery img {
 	  height: 250px;
+	}
+
+	.gallery-item {
+	  padding: 3px;
 	}
   }
   
   @media (max-width: 480px) {
 	.gallery {
 	  grid-template-columns: 1fr;
-	  gap: 15px;
+	  gap: 20px;
 	}
   }
 
@@ -1167,9 +1205,558 @@
   
   
 
+
+/* ===========================
+   WhatsApp Floating Button
+   =========================== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: whatsappPulse 2s infinite;
+  text-decoration: none;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float svg {
+  width: 32px;
+  height: 32px;
+  fill: white;
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: 70px;
+  background: #333;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+  opacity: 1;
+  visibility: visible;
+  right: 75px;
+}
+
+@keyframes whatsappPulse {
+  0%, 100% {
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 40px rgba(37, 211, 102, 0.8), 0 0 0 15px rgba(37, 211, 102, 0.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+  }
   
+  .whatsapp-float svg {
+    width: 28px;
+    height: 28px;
+  }
   
+  .whatsapp-tooltip {
+    display: none;
+  }
+}
+
+/* WhatsApp Contact Button in details card */
+.whatsapp-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  background: linear-gradient(135deg, #128C7E, #075E54);
+}
+
+.whatsapp-contact-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+/* ===========================
+   Enhanced Contact Form with WhatsApp
+   =========================== */
+.contact-form-modern {
+  background: linear-gradient(145deg, #ffffff, #f8f5ff);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(75, 0, 130, 0.12);
+  max-width: 600px;
+  margin: 30px auto;
+  animation: fadeInUp 0.8s ease-out;
+  border: 1px solid rgba(75, 0, 130, 0.08);
+}
+
+.contact-form-modern h3 {
+  color: #4b0082;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.contact-form-modern .form-subtitle {
+  color: #5b4a7a;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #3a0066;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 15px 18px;
+  border: 2px solid #e8e0f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  background: white;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #6c44d9;
+  box-shadow: 0 0 0 4px rgba(108, 68, 217, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.whatsapp-submit-btn {
+  width: 100%;
+  padding: 16px 30px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+.whatsapp-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(37, 211, 102, 0.5);
+  background: linear-gradient(135deg, #128C7E, #075E54);
+}
+
+.whatsapp-submit-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+
+/* ===========================
+   Modern Map Styling
+   =========================== */
+.map-wrapper {
+  max-width: 1200px;
+  margin: 40px auto 60px;
+  padding: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(75, 0, 130, 0.15);
+  background: linear-gradient(135deg, #4b0082, #6c44d9);
+  transition: all 0.4s ease;
+  animation: fadeIn 1s ease-out 0.3s backwards;
+  position: relative;
+}
+
+.map-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #4b0082, #6c44d9, #b66bff, #ffd7ff);
+  z-index: 1;
+}
+
+.map-wrapper:hover {
+  box-shadow: 0 20px 60px rgba(75, 0, 130, 0.25);
+  transform: translateY(-5px);
+}
+
+.map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  aspect-ratio: 16 / 9;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+/* ===========================
+   Enhanced Footer
+   =========================== */
+.tiny-footer {
+  background: linear-gradient(135deg, #2d0050 0%, #4b0082 50%, #6c44d9 100%);
+  color: #f4eaff;
+  width: 100%;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+  border-top: 3px solid #b66bff;
+  box-shadow: 0 -10px 40px rgba(75, 0, 130, 0.3);
+  margin-top: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.tiny-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  animation: footerShimmer 3s ease-in-out infinite;
+}
+
+@keyframes footerShimmer {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+.tiny-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.tiny-footer .tf-copy,
+.tiny-footer .tf-credit { 
+  margin: 0; 
+  line-height: 1.6;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.tiny-footer .tf-link {
+  color: #ffd7ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 2px 0;
+}
+
+.tiny-footer .tf-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ffd7ff, #b66bff);
+  transition: width 0.3s ease;
+}
+
+.tiny-footer .tf-link:hover {
+  color: white;
+  text-shadow: 0 0 10px rgba(255,215,255,0.5);
+}
+
+.tiny-footer .tf-link:hover::after {
+  width: 100%;
+}
+
+/* ===========================
+   Additional Animation Effects
+   =========================== */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Enhance page title animations */
+.section-title {
+  animation: fadeInScale 0.8s ease-out;
+}
+
+.section-title::after {
+  animation: expandWidth 1.2s ease-out 0.3s backwards;
+}
+
+/* Service cards enhanced animation */
+.service-card {
+  animation: slideInUp 0.8s ease-out backwards;
+}
+
+/* Smooth scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator span {
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-bottom: 3px solid rgba(255,255,255,0.8);
+  border-right: 3px solid rgba(255,255,255,0.8);
+  transform: rotate(45deg);
+  animation: scrollDown 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-15px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Enhanced About page animations */
+.evolve-about {
+  animation: fadeInScale 0.8s ease-out;
+}
+
+.evolve-about__services {
+  position: relative;
+  overflow: hidden;
+}
+
+.evolve-about__services::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(75, 0, 130, 0.05), transparent);
+  animation: shimmerSlide 3s ease-in-out infinite;
+}
+
+@keyframes shimmerSlide {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Contact details card enhancement */
+.contact-details {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4b0082, #6c44d9, #b66bff);
+  border-radius: 4px 4px 0 0;
+}
+
+/* ===========================
+   Mobile View Improvements
+   =========================== */
+@media (max-width: 768px) {
+  .tiny-footer {
+    padding: 25px 15px;
+    font-size: 0.9rem;
+  }
   
+  .tiny-footer-inner {
+    flex-direction: column;
+    gap: 12px;
+  }
   
+  .map-wrapper {
+    margin: 30px 15px 40px;
+    border-radius: 15px;
+  }
   
+  .contact-form-modern {
+    padding: 25px 20px;
+    margin: 20px 15px;
+  }
   
+  .gallery-item {
+    padding: 3px;
+  }
+  
+  .gallery-item::before {
+    animation-duration: 6s;
+  }
+}
+
+@media (max-width: 480px) {
+  .tiny-footer {
+    padding: 20px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .contact-form-modern h3 {
+    font-size: 1.5rem;
+  }
+  
+  .whatsapp-submit-btn {
+    font-size: 1rem;
+    padding: 14px 25px;
+  }
+}
+
+/* ===========================
+   Performance Optimizations
+   =========================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* GPU acceleration for smooth animations */
+.whatsapp-float,
+.gallery-item,
+.service-card,
+.contact-details,
+.contact-form-modern {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Lazy load optimization hint */
+img {
+  content-visibility: auto;
+}
+
