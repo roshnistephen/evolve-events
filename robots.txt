@@ -1,4 +1,31 @@
 User-agent: *
 Allow: /
+Disallow: /.git/
 
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Allow major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sitemap location
 Sitemap: https://evolve-events.lokaai.in/sitemap.xml
+
+# Host
+Host: https://evolve-events.lokaai.in

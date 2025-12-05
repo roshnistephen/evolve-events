@@ -76,13 +76,62 @@ document.addEventListener("DOMContentLoaded", () => {
   }, observerOptions);
   
   // Observe elements for fade-in animation
-  const animatedElements = document.querySelectorAll('.service-card, .gallery-item, .contact-details, .contact-form');
+  const animatedElements = document.querySelectorAll('.service-card, .gallery-item, .contact-details, .contact-form-modern');
   animatedElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
-});
 
+  // WhatsApp Contact Form Handler
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value.trim();
+      
+      // Build WhatsApp message
+      let whatsappMessage = `Hi, I'm ${name}.\n`;
+      whatsappMessage += `Phone: ${phone}\n`;
+      if (service) {
+        whatsappMessage += `Service Interested: ${service}\n`;
+      }
+      whatsappMessage += `\nMessage:\n${message}`;
+      
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      
+      // WhatsApp number (91 is India code, remove + and spaces)
+      const whatsappNumber = '919846090694';
+      
+      // Create WhatsApp URL
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      
+      // Open WhatsApp in new tab
+      window.open(whatsappURL, '_blank');
+      
+      // Reset form
+      contactForm.reset();
+    });
+  }
+
+  // Animate gallery items on scroll
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  galleryItems.forEach((item, index) => {
+    item.style.animationDelay = `${index * 0.1}s`;
+  });
+
+  // Add loading animation to images
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    img.addEventListener('load', function() {
+      this.style.opacity = '1';
+    });
+  });
+});
   
