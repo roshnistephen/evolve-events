@@ -195,7 +195,16 @@
 	background-size: 400% 400%;
 	padding: 4px;
 	cursor: pointer;
-	animation: glowingBorder 4s ease-in-out infinite, gradientShift 8s ease infinite;
+	animation: glowingBorderAnim 4s ease-in-out infinite, gradientShift 8s ease infinite;
+  }
+
+  @keyframes glowingBorderAnim {
+	0%, 100% {
+	  box-shadow: 0 0 15px rgba(75, 0, 130, 0.3), 0 0 30px rgba(108, 68, 217, 0.2);
+	}
+	50% {
+	  box-shadow: 0 0 25px rgba(75, 0, 130, 0.5), 0 0 50px rgba(182, 107, 255, 0.3);
+	}
   }
 
   .gallery-item::before {
@@ -233,12 +242,6 @@
 	100% {
 	  background-position: 0% 50%;
 	}
-  }
-  
-  .gallery-item-inner {
-	background: #fff;
-	border-radius: 12px;
-	overflow: hidden;
   }
 
   .gallery img {
@@ -1285,6 +1288,33 @@
   .whatsapp-tooltip {
     display: none;
   }
+}
+
+/* WhatsApp Contact Button in details card */
+.whatsapp-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  background: linear-gradient(135deg, #128C7E, #075E54);
+}
+
+.whatsapp-contact-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
 }
 
 /* ===========================
